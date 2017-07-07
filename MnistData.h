@@ -57,6 +57,10 @@ public:
 		return vec[id*Rows*Cols + row*Cols + col];
 	}
 
+	double at(int id, int px){
+		return vec[id*Rows*Cols + px];
+	}
+
 	void View(int id){
 		for (int row = 0; row < Rows;row++){
 			for (int col = 0; col < Cols;col++){
@@ -105,6 +109,11 @@ public:
 	void View(int id){
 		std::cout << vec[id] << std::endl;
 	}
+
+	int Size(){
+		return NumberOfItems;
+	}
+
 };
 
 class DataSet{
@@ -113,7 +122,7 @@ private:
 	Labels lbls;
 
 public:
-	DataSet(int Test = 0){
+	void Read(int Test = 0){
 		if (Test){
 			imgs.Read(TestImage);
 			lbls.Read(TestLabel);
@@ -129,9 +138,18 @@ public:
 		imgs.View(id);
 	}
 
-};
+	int Size(){
+		return lbls.Size();
+	}
 
-void test(){
-	DataSet ds;
-	for (int i = 0; i < 10;i++)ds.View(i);
-}
+	int label(int id){
+		return lbls.at(id);
+	}
+
+	void Copy(int id, std::vector<double>* ptr){
+		for (int i = 0; i < 28 * 28;i++){
+			(*ptr)[i] = imgs.at(id, i);
+		}
+	}
+
+};

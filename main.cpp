@@ -1,10 +1,10 @@
-#include "MnistData.h"
+#include "BP.h"
 
 
 int main(){
 
-	test();
-
+	BP bp;
+	bp.Do();
 
 	return 0;
 }
